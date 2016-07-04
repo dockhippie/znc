@@ -1,0 +1,51 @@
+#!/bin/bash
+
+chown -R znc:znc \
+  /var/lib/znc
+
+declare -x ZNC_WEB_IPV4
+declare -x ZNC_WEB_IPV6
+declare -x ZNC_WEB_SSL
+declare -x ZNC_IRC_IPV4
+declare -x ZNC_IRC_IPV6
+declare -x ZNC_IRC_SSL
+declare -x ZNC_USERNAME
+declare -x ZNC_PASSWORD
+declare -x ZNC_NICK
+declare -x ZNC_ALTNICK
+declare -x ZNC_IDENT
+declare -x ZNC_REALNAME
+
+[[ -z "${ZNC_WEB_IPV4}" ]] && ZNC_WEB_IPV4=true
+[[ -z "${ZNC_WEB_IPV6}" ]] && ZNC_WEB_IPV6=true
+[[ -z "${ZNC_WEB_SSL}" ]] && ZNC_WEB_SSL=false
+[[ -z "${ZNC_IRC_IPV4}" ]] && ZNC_IRC_IPV4=true
+[[ -z "${ZNC_IRC_IPV6}" ]] && ZNC_IRC_IPV6=true
+[[ -z "${ZNC_IRC_SSL}" ]] && ZNC_IRC_SSL=false
+[[ -z "${ZNC_USERNAME}" ]] && ZNC_USERNAME=admin
+[[ -z "${ZNC_PASSWORD}" ]] && ZNC_PASSWORD=admin
+[[ -z "${ZNC_NICK}" ]] && ZNC_NICK=admin
+[[ -z "${ZNC_ALTNICK}" ]] && ZNC_ALTNICK=admin_
+[[ -z "${ZNC_IDENT}" ]] && ZNC_IDENT=admin
+[[ -z "${ZNC_REALNAME}" ]] && ZNC_REALNAME=Admin
+
+if [[ ! -f /var/lib/znc/znc.pem ]]
+then
+  /usr/bin/templater -d -p znc \
+    -o /var/lib/znc/configs/znc.conf \
+    /etc/templates/znc.conf.tmpl
+
+  if [[ $? -ne 0 ]]
+  then
+    /bin/s6-svscanctl -t /etc/s6
+  fi
+
+  /usr/bin/gosu znc /usr/bin/znc \
+    -d /var/lib/znc \
+    --makepem
+
+  if [[ $? -ne 0 ]]
+  then
+    /bin/s6-svscanctl -t /etc/s6
+  fi
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -f ./setup ]
+then
+  source ./setup
+fi
+
+STARTCMD="/usr/bin/znc -f -d /var/lib/znc"
+
+pushd /var/lib/znc > /dev/null
+exec /usr/bin/gosu znc ${STARTCMD}
+popd > /dev/null

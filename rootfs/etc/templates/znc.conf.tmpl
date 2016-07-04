@@ -1,0 +1,37 @@
+Version = 1.6.3
+Skin = dark-clouds
+LoadModule = webadmin
+
+<Listener web>
+  Port = 8080
+  AllowIRC = false
+  AllowWeb = true
+
+  IPv4 = {{ envString "WEB_IPV4" }}
+  IPv6 = {{ envString "WEB_IPV6" }}
+  SSL = {{ envString "WEB_SSL" }}
+</Listener>
+
+<Listener irc>
+  Port = 6667
+  AllowIRC = true
+  AllowWeb = false
+
+  IPv4 = {{ envString "IRC_IPV4" }}
+  IPv6 = {{ envString "IRC_IPV6" }}
+  SSL = {{ envString "IRC_SSL" }}
+</Listener>
+
+<User {{ envString "USERNAME" }}>
+  Admin = true
+  Pass = {{ envString "PASSWORD" }}
+
+  Nick = {{ envString "NICK" }}
+  AltNick = {{ envString "ALTNICK" }}
+  Ident = {{ envString "IDENT" }}
+
+  RealName = {{ envString "REALNAME" }}
+
+  LoadModule = chansaver
+  LoadModule = controlpanel
+</User>
