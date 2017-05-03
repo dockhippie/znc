@@ -40,7 +40,7 @@ then
     /bin/s6-svscanctl -t /etc/s6
   fi
 
-  /usr/bin/gosu znc /usr/bin/znc \
+  su-exec znc /usr/bin/znc \
     -d /var/lib/znc \
     --makepem
 

@@ -8,5 +8,5 @@ fi
 STARTCMD="/usr/bin/znc -f -d /var/lib/znc"
 
 pushd /var/lib/znc > /dev/null
-exec /usr/bin/gosu znc ${STARTCMD}
+  exec su-exec znc ${STARTCMD}
 popd > /dev/null
