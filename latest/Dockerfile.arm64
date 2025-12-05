@@ -1,0 +1,17 @@
+FROM ghcr.io/dockhippie/alpine:3.22-arm64
+
+VOLUME ["/var/lib/znc"]
+EXPOSE 8080 6667
+
+WORKDIR /var/lib/znc
+CMD ["/usr/bin/container"]
+
+RUN apk update && \
+  apk upgrade && \
+  mkdir -p /var/lib/znc && \
+  groupadd -g 1000 znc && \
+  useradd -u 1000 -d /var/lib/znc -g znc -s /bin/bash -m znc && \
+  apk add znc znc-extra && \
+  rm -rf /var/cache/apk/*
+
+COPY ./overlay /

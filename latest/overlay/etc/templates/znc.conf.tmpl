@@ -1,0 +1,37 @@
+Version = 1.6.3
+Skin = dark-clouds
+LoadModule = webadmin
+
+<Listener web>
+  Port = 8080
+  AllowIRC = false
+  AllowWeb = true
+
+  IPv4 = {{ getenv "ZNC_WEB_IPV4" }}
+  IPv6 = {{ getenv "ZNC_WEB_IPV6" }}
+  SSL = {{ getenv "ZNC_WEB_SSL" }}
+</Listener>
+
+<Listener irc>
+  Port = 6667
+  AllowIRC = true
+  AllowWeb = false
+
+  IPv4 = {{ getenv "ZNC_IRC_IPV4" }}
+  IPv6 = {{ getenv "ZNC_IRC_IPV6" }}
+  SSL = {{ getenv "ZNC_IRC_SSL" }}
+</Listener>
+
+<User {{ getenv "ZNC_USERNAME" }}>
+  Admin = true
+  Pass = {{ getenv "ZNC_PASSWORD" }}
+
+  Nick = {{ getenv "ZNC_NICK" }}
+  AltNick = {{ getenv "ZNC_ALTNICK" }}
+  Ident = {{ getenv "ZNC_IDENT" }}
+
+  RealName = {{ getenv "ZNC_REALNAME" }}
+
+  LoadModule = chansaver
+  LoadModule = controlpanel
+</User>
