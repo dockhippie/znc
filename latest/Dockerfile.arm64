@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/alpine:3.22-arm64
+FROM ghcr.io/dockhippie/alpine:3.23-arm64@sha256:1e14dc19caca0a87e98fb6066851712c4bfc9bcd9202ce6598161eb6d1b8bfff
 
 VOLUME ["/var/lib/znc"]
 EXPOSE 8080 6667
