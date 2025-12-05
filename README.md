@@ -22,7 +22,21 @@ For the available versions please look at [Docker Hub][dockerhub] or
 ## Available environment variables
 
 ```console
-
+ZNC_ALTNICK = admin_
+ZNC_HEALTHCHECK_CODE = 200
+ZNC_HEALTHCHECK_URL = http://localhost:8080/
+ZNC_IDENT = admin
+ZNC_IRC_IPV4 = true
+ZNC_IRC_IPV6 = true
+ZNC_IRC_SSL = false
+ZNC_NICK = admin
+ZNC_PASSWORD = admin
+ZNC_REALNAME = Admin
+ZNC_SKIP_CHOWN = false
+ZNC_USERNAME = admin
+ZNC_WEB_IPV4 = true
+ZNC_WEB_IPV6 = true
+ZNC_WEB_SSL = false
 ```
 
 ## Inherited environment variables
