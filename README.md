@@ -39,6 +39,8 @@ ZNC_WEB_IPV6 = true
 ZNC_WEB_SSL = false
 ```
 
+Extracted by the command: `grep -hE ': "\$\{(.*)\}"' latest/overlay/etc/entrypoint.d/*.sh | sed 's/: "\${//' | sed 's/:="/ = /' | sed 's/"}"$//' | sort | uniq`
+
 ## Inherited environment variables
 
 *  [webhippie/alpine](https://github.com/dockhippie/alpine#available-environment-variables)
